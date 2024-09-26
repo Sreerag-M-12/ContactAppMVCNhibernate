@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ContactAppMVCNhibernate.Models.Contact>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+}
+<br />
+<h2 style="text-align: center;"><strong><u>Contact List</u></strong></h2>
+<br />
+<hr />
+<div id="contact-list">
+    <br />
+    @if (User.IsInRole("Staff"))
+    {
+        <p>
+            <button type="button" class="btn btn-outline-danger" id="btnAdd">
+                Add  new
+            </button>
+        </p>
+    }
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    FName
+                </th>
+                <th>
+                    LName
+                </th>
+                <th>
+                    Current Status
+                </th>
+                <th>Actions</th>
+                <th></th>
+
+            </tr>
+        </thead>
+
+        <tbody id="tblBody">
+        </tbody>
+    </table>
+</div>
+
+<div id="active-contacts" style="display:none;">
+    <!-- Partial view will be loaded here -->
+</div>
+
+<div id="contact-create" style="display:none;">
+    <!-- Partial view will be loaded here -->
+    @Html.Partial("_Create")
+</div>
+
+<div id="contact-edit" style="display:none;">
+    <!-- Partial view will be loaded here -->
+</div>
+<!-- Rest of the code remains the same -->
+
+<script src="~/Scripts/ContactCrud.js"></script>
+
+<script>
+    $(document).ready(function () {
+        loadContacts();
+    });
+
+    function loadActiveContacts() {
+    $.ajax({
+        type: "GET",
+        url: '@Url.Action("ActiveContacts", "ContactAjax")',
+        success: function (data) {
+            $("#active-contacts").html(data);
+            $("#contact-list").hide();
+            $("#contact-create").hide();
+
+            $("#active-contacts").show();
+        }
+    });
+}
+</script>
+<style>
+    button.btn-info {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        width: 150px; /* or any fixed width you prefer */
+    }
+</style>

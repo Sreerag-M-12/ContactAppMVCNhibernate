@@ -1,0 +1,82 @@
+﻿@model ContactAppMVCNhibernate.ViewModels.LoginVM
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <br />
+<div class="form-login">
+    <h4>Login</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Login" class="btn btn-success" />
+        </div>
+    </div>
+
+    <br />
+    <div>
+        @Html.ActionLink("SignUP", "Register")
+
+    </div>
+
+</div>
+}
+
+<style>
+
+    .form-login {
+        text-align: center;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #222222;
+        color: white;
+    }
+
+    .form-group {
+        text-align: center;
+    }
+
+    .form-control {
+        width: 100%;
+        box-sizing: border-box;
+        display: inline-block;
+    }
+
+    .col-md-10 {
+        float: none;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    input.btn-success {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+</style>

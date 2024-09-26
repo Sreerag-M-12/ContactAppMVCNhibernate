@@ -1,0 +1,41 @@
+﻿@model ContactAppMVCNhibernate.Models.Contact
+
+<div id="contact-edit-form">
+    <br />
+    <h4>Edit Contact</h4>
+    <hr />
+    <form id="edit-contact-form">
+        <br />
+        <input type="hidden" name="ContactId" value="@Model.ContactId" />
+        <div class="form-group">
+            <label for="FName">First Name:</label>
+            <input type="text" name="FName" value="@Model.FName" class="form-control" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="LName">Last Name:</label>
+            <input type="text" name="LName" value="@Model.LName" class="form-control" required />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success" id="btn-success">Save</button>
+    </form>
+</div>
+
+<style>
+    #contact-edit-form {
+        text-align: center;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #222222;
+        color: white;
+    }
+
+    #btn-success {
+        width: 80%;
+        display: block;
+        margin: 0 auto;
+    }
+</style>

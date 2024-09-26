@@ -1,0 +1,98 @@
+﻿@model IEnumerable<ContactAppMVCNhibernate.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<h2 style="text-align: center;"><strong><u>Staff Details</u></strong></h2>
+<br />
+<hr />
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-dark" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAdmin)
+        </th>
+        <th>
+            Current Status
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAdmin)
+            </td>
+            <td>
+                <button class="@(item.IsActive ? "btn btn-info" : "btn btn-danger") toggle-status-button" data-userid="@item.UserId" data-is-active="@item.IsActive" id="toggle">
+                    @(item.IsActive ? "Active" : "Inactive")
+                </button>
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { userId = item.UserId }) |
+                @Html.ActionLink("Contact", "GetContactsForAdmin", "ContactAjax", new { userid = item.UserId }, null) 
+
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.ActionLink("Active Users", "ActiveUsers") |
+</div>
+
+<script>
+    $(document).on('click', '.toggle-status-button', function () {
+        var button = $(this);
+        var userId = button.data('userid');
+        var isActive = button.data('is-active');
+
+        var newStatus = !isActive; // Toggle the active status
+
+        $.ajax({
+            url: '@Url.Action("ToggleActiveStatus", "User")', // Adjust the URL to match your controller/action
+            type: 'POST',
+            data: {
+                userId: userId,
+                isActive: newStatus
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert(response.message);
+                    // Update the button text and data attribute
+                    button.text(newStatus ? 'Active' : 'Inactive');
+                    button.data('is-active', newStatus);
+                    // Update the button class
+                    if (newStatus) {
+                        button.removeClass('btn-danger').addClass('btn-info');
+                    } else {
+                        button.removeClass('btn-info').addClass('btn-danger');
+                    }
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert('An error occurred: ' + error);
+            }
+        });
+    });
+</script>

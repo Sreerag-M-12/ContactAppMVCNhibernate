@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<h2 style="text-align: center;"><strong> <u>  Contact Details </u></strong></h2>
+<br />
+<hr />
+
+<div class="container" id="productList" style="text-align:center">
+    <div class="interior">
+        <table id="grid"></table>
+
+        @if (User.IsInRole("Staff"))
+        {
+            <div id="pager"></div> <!--jqGrid pager-->
+        }
+
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/redmond/jquery-ui.css">
+<script src="~/Scripts/myGrid.js"></script>
+<style>
+    .interior {
+        margin-left: 300px;
+        margin-right:300px;
+    }   
+</style>

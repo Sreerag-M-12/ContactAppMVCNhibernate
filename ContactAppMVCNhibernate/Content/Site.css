@@ -1,0 +1,120 @@
+﻿
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* General styles for the page */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-block-color:black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    table th, table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        color: white;
+        text-transform: uppercase;
+        font-size: 14px;
+        padding: 100px;
+    }
+
+   
+
+    table td {
+        font-size: 16px;
+        color: #333;
+    }
+
+/* Button styling */
+button.toggle-status-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+    width: 100px; /* or any fixed width you prefer */
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+
+button.toggle-status-button:hover {
+    opacity: 0.8;
+}
+
+button.btn-warning {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px; /* or any fixed width you prefer */
+}
+button.btn-dark {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px; /* or any fixed width you prefer */
+}
+button.btn-danger {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px; /* or any fixed width you prefer */
+}
+button.btn-info {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px; /* or any fixed width you prefer */
+}
+/* Action links styling */
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* Links for actions in the footer */
+div a {
+    color: #333;
+    
+}
+

@@ -1,0 +1,66 @@
+﻿@model ContactAppMVCNhibernate.Models.Contact
+
+<div id="contact-create-form">
+    @using (Html.BeginForm("Create", "ContactAjax", FormMethod.Post, new { id = "create-contact-form" }))
+    {
+        @Html.AntiForgeryToken()
+        <br />
+        <h4>Add new Contact</h4>
+        <hr />
+        <br />
+        <div class="form-group">
+            @Html.Label("First Name: ")
+            @Html.EditorFor(model => model.FName, new { htmlAttributes = new { @class = "form-control" , id="FName"} })
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("Last Name: ")
+            @Html.EditorFor(model => model.LName, new { htmlAttributes = new { @class = "form-control", id="LName" } })
+        </div>
+        <br />
+        <button type="button" class="btn btn-primary" id="btnCreate">Create</button>
+        <br />
+    }
+</div>
+
+<script>
+    $("#btnCreate").click(() => {
+
+        var data = {
+
+            FName: $("#FName").val(),
+
+            LName: $("#LName").val(),
+
+            IsActive: true
+
+        }
+
+        addNewRecord(data)
+
+        $("#contact-list").show()
+
+        $("#contact-create").hide()
+
+    })
+
+</script>
+
+<style>
+    #contact-create-form {
+        text-align: center;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #222222;
+        color: white;
+    }
+
+    #btnCreate {
+        width: 80%;
+        display: block;
+        margin: 0 auto;
+    }
+</style>

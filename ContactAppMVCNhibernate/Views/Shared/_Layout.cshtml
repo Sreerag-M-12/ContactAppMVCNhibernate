@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <script src="~/Scripts/bootstrap.min.js"></script>*@
+
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    @* first jquery then jqgrid *@
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/jquery.jqGrid.min.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-dark bg-dark navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>*@
+
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Contact App", "Index", "User", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else if (User.IsInRole("Staff"))
+                {
+                    @Html.ActionLink("Contact App", "Index", "ContactAjax", new { userId = Session["userid"] }, new { @class = "navbar-brand" })
+
+                }
+                else
+                {
+                    @Html.ActionLink("Contact App", "Home", "User", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span style="color:white;" class="navbar-brand">Welcome @User.Identity.Name</span>
+
+                    if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("View Admins", "GetAdmins", "User", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Active Contacts", "ActiveContacts", "ContactAjax", new { area = "" }, new { @class = "navbar-brand", @onclick = "loadActiveContacts(); return false;" })
+                    }
+                    @Html.ActionLink("LogOut", "Logout", "User", new { area = "" }, new { @class = "navbar-brand pull-right" })
+                }
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+</body>
+
+
+
+</html>
+<style>
+    .navbar-collapse.collapse {
+        overflow: visible; /* make sure the navbar-collapse container doesn't hide the floated element */
+    }
+
+    .navbar-header {
+        
+        top: 0;
+    }
+    .pull-right {
+        float: right;
+        margin-left: 10px;
+        margin-top: 1px;
+        position: absolute; /* make it absolute so it's always in the rightmost corner */
+        right: 0; /* set the right position to 0 */
+        top: 0;
+    }
+
+    .form-horizontal {
+        text-align: center;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #222222;
+        color: white;
+    }
+
+    .form-group {
+        text-align: center;
+    }
+
+    .form-control {
+        width: 100%;
+        box-sizing: border-box;
+        display: inline-block;
+    }
+
+    .col-md-10 {
+        float: none;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    input.btn-success {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+</style>
